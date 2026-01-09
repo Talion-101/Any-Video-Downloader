@@ -155,6 +155,8 @@ class VideoDownloader:
             'progress_hooks': [self._progress_hook],
             'quiet': True,
             'no_warnings': True,
+            # Add User-Agent to try to evade 403 blocks
+            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         }
 
         if format_data['type'] == 'audio':
@@ -183,6 +185,7 @@ class VideoDownloader:
             self.history_manager.update_status(history_entry['id'], 'Finished')
             if self.progress_callback:
                 self.progress_callback("All downloads finished!", 1.0)
+            return True # <--- Return Success
                 
         except Exception as e:
             if self.is_paused:
@@ -197,6 +200,7 @@ class VideoDownloader:
 
             if self.progress_callback:
                 self.progress_callback(msg, 0.0)
+            return False # <--- Return Failure
 
     def _progress_hook(self, d):
         # Check Cancellation Status

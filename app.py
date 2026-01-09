@@ -97,23 +97,30 @@ if st.session_state.analyzed_data:
                 
                 # Simplified: Run download
                 # Note: This runs in main thread, blocking UI, but updating progress via placeholder works.
-                downloader.download_video(data['webpage_url'], selected_format, output_path)
+                success = downloader.download_video(data['webpage_url'], selected_format, output_path)
                 
-                st.session_state.download_done = True
-                st.success("Download Finished!")
-                
-                # Find the latest file in downloads folder to offer
-                # (A simple heuristic for MVP)
-                list_of_files = os.listdir(output_path)
-                full_path = max([os.path.join(output_path, f) for f in list_of_files], key=os.path.getctime)
-                
-                with open(full_path, "rb") as file:
-                   btn = st.download_button(
-                        label="Save File",
-                        data=file,
-                        file_name=os.path.basename(full_path),
-                        mime="application/octet-stream"
-                    )
+                if success:
+                    st.session_state.download_done = True
+                    st.success("Download Finished!")
+                    
+                    # Find the latest file in downloads folder to offer
+                    # (A simple heuristic for MVP)
+                    list_of_files = os.listdir(output_path)
+                    if list_of_files:
+                        full_path = max([os.path.join(output_path, f) for f in list_of_files], key=os.path.getctime)
+                        
+                        with open(full_path, "rb") as file:
+                           btn = st.download_button(
+                                label="Save File",
+                                data=file,
+                                file_name=os.path.basename(full_path),
+                                mime="application/octet-stream"
+                            )
+                    else:
+                        st.warning("Download appeared to finish but file missing.")
+                else:
+                     st.error("Download Failed. See error message above.")
+                     
             except Exception as e:
                 st.error(f"Download Error: {e}")
 
