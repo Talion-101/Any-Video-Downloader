@@ -1,6 +1,6 @@
 # Any Video Downloader
 
-A modern, sleek, and powerful video downloader application aimed at providing a premium user experience. Built with Python and CustomTkinter, it supports downloading videos and playlists from YouTube, Vimeo, and many other platforms.
+A modern, sleek, and powerful video downloader application aimed at providing better user experience. Built with Python and CustomTkinter, it supports downloading videos and playlists from YouTube, Vimeo, and many other platforms.
 
 ## 🚀 Features
 
@@ -25,7 +25,7 @@ A modern, sleek, and powerful video downloader application aimed at providing a 
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/any-video-downloader.git
+    git clone https://github.com/Talion-101/any-video-downloader.git
     cd any-video-downloader
     ```
 
@@ -58,3 +58,4 @@ A modern, sleek, and powerful video downloader application aimed at providing a 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
